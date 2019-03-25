@@ -14,8 +14,8 @@ type Keys struct {
 }
 
 // Content returns the underlying content the keys were generated for
-func (keys Keys) Content() *HarvestedResource {
-	return keys.hr
+func (keys Keys) Content() *Content {
+	return keys.content
 }
 
 // UniqueID returns the unique identifier based on key searching algorithm
