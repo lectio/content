@@ -69,7 +69,7 @@ func CreateKeys(c Content, existsFn KeyExists) Keys {
 	result := new(defaultKeys)
 	result.content = c
 	result.uniqueID = generateUniqueID(existsFn)
-	result.slug = slug.Make(c.Title())
+	result.slug = slug.Make(c.Title().Clean())
 	return result
 }
 
