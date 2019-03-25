@@ -41,7 +41,7 @@ type Content interface {
 	Summary() string
 	Categories() []string
 	CreatedOn() time.Time
-	FeaturedImage() url.URL
+	FeaturedImage() *url.URL
 	Keys() Keys
 }
 
