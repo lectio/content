@@ -5,36 +5,44 @@ import (
 	"os"
 	"sync"
 	"time"
+
+	"github.com/gosimple/slug"
 )
 
 // Keys tracks the keys associated with some content.
-type Keys struct {
-	content  *Content
+type defaultKeys struct {
+	content  Content
 	uniqueID uint32
+	slug     string
 }
 
 // Content returns the underlying content the keys were generated for
-func (keys Keys) Content() *Content {
+func (keys defaultKeys) Content() Content {
 	return keys.content
 }
 
 // UniqueID returns the unique identifier based on key searching algorithm
-func (keys Keys) UniqueID() uint32 {
+func (keys defaultKeys) UniqueID() uint32 {
 	return keys.uniqueID
 }
 
 // UniqueIDText returns a unique identity key formatted as requested
-func (keys Keys) UniqueIDText(format string) string {
+func (keys defaultKeys) UniqueIDText(format string) string {
 	return fmt.Sprintf(format, keys.uniqueID)
 }
 
 // Slug returns the title of the content
-func (keys Keys) Slug() string {
+func (keys defaultKeys) Slug() string {
 	return "TODO: Not implemented yet"
 }
 
 // KeyExists is a function passed in that checks whether a key already exists
 type KeyExists func(random uint32, try int) bool
+
+// KeyDoesNotExist satisfies KeyExists interface and always returns false
+func KeyDoesNotExist(random uint32, try int) bool {
+	return false
+}
 
 // GenerateUniqueID generates a unique identifier for this resource
 func generateUniqueID(existsFn KeyExists) uint32 {
@@ -57,10 +65,11 @@ func generateUniqueID(existsFn KeyExists) uint32 {
 }
 
 // CreateKeys returns a new content keys object
-func CreateKeys(c *Content, existsFn KeyExists) *Keys {
-	result := new(Keys)
+func CreateKeys(c Content, existsFn KeyExists) Keys {
+	result := new(defaultKeys)
 	result.content = c
 	result.uniqueID = generateUniqueID(existsFn)
+	result.slug = slug.Make(c.Title())
 	return result
 }
 
