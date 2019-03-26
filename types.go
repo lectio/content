@@ -49,5 +49,5 @@ type Content interface {
 // CuratedLink is content which is basically a link to some other content on the Internet
 type CuratedLink interface {
 	Content
-	Target() url.URL
+	Target() *url.URL
 }
