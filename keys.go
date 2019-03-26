@@ -33,7 +33,7 @@ func (keys defaultKeys) UniqueIDText(format string) string {
 
 // Slug returns the title of the content
 func (keys defaultKeys) Slug() string {
-	return "TODO: Not implemented yet"
+	return keys.slug
 }
 
 // KeyExists is a function passed in that checks whether a key already exists
