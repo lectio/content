@@ -23,6 +23,7 @@ func (t Title) Clean() string {
 
 // Collection is a list of Content items
 type Collection interface {
+	Source() string
 	Content() []Content
 }
 
