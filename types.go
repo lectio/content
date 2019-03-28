@@ -2,23 +2,21 @@ package content
 
 import (
 	"net/url"
-	"regexp"
 	"time"
 )
 
 // Title is the content title which can be retrieved in different ways
-type Title string
-
-var sourceNameAsSuffixRegEx = regexp.MustCompile(` \| .*$`) // Removes " | Healthcare IT News" from a title like "xyz title | Healthcare IT News"
-
-// Original is the title's original text
-func (t Title) Original() string {
-	return string(t)
+type Title interface {
+	Original(c Content) string
+	Clean(c Content) string
 }
 
-// Clean is the title's "cleaned up text" (which removes "| ..."" suffixes)
-func (t Title) Clean() string {
-	return sourceNameAsSuffixRegEx.ReplaceAllString(string(t), "")
+// Summary is the content's description or summary which can be retrieved in different ways
+type Summary interface {
+	Original(c Content) string
+	FirstSentenceOfBody(c Content) string
+	OpenGraphContent(c Content, ogKey string) string
+	TwitterContent(c Content, twitterKey string) string
 }
 
 // Collection is a list of Content items
@@ -38,8 +36,8 @@ type Keys interface {
 // Content is the typical set of fields defined for almost any generated or constructed content page
 type Content interface {
 	Title() Title
+	Summary() Summary
 	Body() string
-	Summary() string
 	Categories() []string
 	CreatedOn() time.Time
 	FeaturedImage() *url.URL
