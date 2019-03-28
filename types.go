@@ -14,7 +14,7 @@ type Title interface {
 // Summary is the content's description or summary which can be retrieved in different ways
 type Summary interface {
 	Original(c Content) string
-	FirstSentenceOfBody(c Content, defaultValue *string) (string, bool)
+	FirstSentenceOfBody(c Content, defaultValue *string) (string, error)
 	OpenGraphContent(c Content, ogKey string, defaultValue *string) (string, bool)
 	TwitterContent(c Content, twitterKey string, defaultValue *string) (string, bool)
 }
