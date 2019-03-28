@@ -14,9 +14,9 @@ type Title interface {
 // Summary is the content's description or summary which can be retrieved in different ways
 type Summary interface {
 	Original(c Content) string
-	FirstSentenceOfBody(c Content) string
-	OpenGraphContent(c Content, ogKey string) string
-	TwitterContent(c Content, twitterKey string) string
+	FirstSentenceOfBody(c Content, defaultValue *string) (string, bool)
+	OpenGraphContent(c Content, ogKey string, defaultValue *string) (string, bool)
+	TwitterContent(c Content, twitterKey string, defaultValue *string) (string, bool)
 }
 
 // Collection is a list of Content items
