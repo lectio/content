@@ -14,8 +14,8 @@ type Title interface {
 // Summary is the content's description or summary which can be retrieved in different ways
 type Summary interface {
 	Original() string
-	FirstSentenceOfBody(defaultValue *string) (string, error)
-	OpenGraphDescription(ogKey string, defaultValue *string) (string, bool)
+	FirstSentenceOfBody() (string, error)
+	OpenGraphDescription() (string, bool)
 }
 
 // Collection is a list of Content items
