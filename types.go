@@ -7,16 +7,15 @@ import (
 
 // Title is the content title which can be retrieved in different ways
 type Title interface {
-	Original(c Content) string
-	Clean(c Content) string
+	Original() string
+	Clean() string
 }
 
 // Summary is the content's description or summary which can be retrieved in different ways
 type Summary interface {
-	Original(c Content) string
-	FirstSentenceOfBody(c Content, defaultValue *string) (string, error)
-	OpenGraphContent(c Content, ogKey string, defaultValue *string) (string, bool)
-	TwitterContent(c Content, twitterKey string, defaultValue *string) (string, bool)
+	Original() string
+	FirstSentenceOfBody(defaultValue *string) (string, error)
+	OpenGraphDescription(ogKey string, defaultValue *string) (string, bool)
 }
 
 // Collection is a list of Content items
@@ -42,6 +41,8 @@ type Content interface {
 	CreatedOn() time.Time
 	FeaturedImage() *url.URL
 	Keys() Keys
+	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
+	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
 }
 
 // CuratedLink is content which is basically a link to some other content on the Internet
