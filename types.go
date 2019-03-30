@@ -22,6 +22,7 @@ type Summary interface {
 type Collection interface {
 	Source() string
 	Content() []Content
+	Errors() []error
 }
 
 // Keys provides different ways of identifying content
@@ -43,6 +44,7 @@ type Content interface {
 	Keys() Keys
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
+	Errors() []error
 }
 
 // CuratedLink is content which is basically a link to some other content on the Internet
