@@ -3,6 +3,8 @@ package content
 import (
 	"net/url"
 	"time"
+
+	"github.com/hashicorp/go-multierror"
 )
 
 // Title is the content title which can be retrieved in different ways
@@ -22,7 +24,7 @@ type Summary interface {
 type Collection interface {
 	Source() string
 	Content() []Content
-	Errors() []error
+	Errors() *multierror.Error
 }
 
 // Keys provides different ways of identifying content
@@ -44,7 +46,7 @@ type Content interface {
 	Keys() Keys
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
-	Errors() []error
+	Errors() *multierror.Error
 }
 
 // CuratedLink is content which is basically a link to some other content on the Internet
