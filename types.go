@@ -5,11 +5,6 @@ import (
 	"time"
 )
 
-// ErrorsCollection tracks a collection of errors encountered
-type ErrorsCollection interface {
-	Errors() []error
-}
-
 // Title is the content title which can be retrieved in different ways
 type Title interface {
 	Original() string
@@ -28,7 +23,7 @@ type Summary interface {
 type Collection interface {
 	Source() string
 	Content() []Content
-	Errors() ErrorsCollection
+	Errors() []error
 }
 
 // Keys provides different ways of identifying content
@@ -50,7 +45,7 @@ type Content interface {
 	Keys() Keys
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
-	Errors() ErrorsCollection
+	Errors() []error
 }
 
 // IgnoreCurationTargetRule is a rule
