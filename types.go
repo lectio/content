@@ -10,6 +10,7 @@ type Title interface {
 	Original() string
 	Clean() string
 	OpenGraphTitle() (string, bool)
+	ForSlug() string
 }
 
 // Summary is the content's description or summary which can be retrieved in different ways
@@ -26,14 +27,6 @@ type Collection interface {
 	Errors() []error
 }
 
-// Keys provides different ways of identifying content
-type Keys interface {
-	Content() Content
-	UniqueID() uint32
-	UniqueIDText(format string) string
-	Slug() string
-}
-
 // Content is the typical set of fields defined for almost any generated or constructed content page
 type Content interface {
 	Title() Title
@@ -42,7 +35,6 @@ type Content interface {
 	Categories() []string
 	CreatedOn() time.Time
 	FeaturedImage() *url.URL
-	Keys() Keys
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
 	Errors() []error

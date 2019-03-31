@@ -126,7 +126,6 @@ func (suite *ContentSuite) TestResolvedURLCleaned() {
 	suite.NotNil(hr.InspectionResults(), "Inspection results should be available")
 }
 
-/* TODO: fix these tests
 func (suite *ContentSuite) TestResolvedURLCleanedKeys() {
 	hr := suite.harvestSingleURLFromMockTweet("Test a good URL %s which will redirect to a URL we want to ignore, with utm_* params", "http://bit.ly/lectio_harvester_resource_test02")
 	isURLValid, isDestValid := hr.IsValid()
@@ -137,23 +136,14 @@ func (suite *ContentSuite) TestResolvedURLCleanedKeys() {
 	isCleaned, _ := hr.IsCleaned()
 	suite.True(isCleaned, "URL should be 'cleaned'")
 	finalURL, resolvedURL, cleanedURL := hr.GetURLs()
-	suite.Equal(resolvedURL.String(), "https://www.netspective.com/solutions/opsfolio/?utm_source=lectio_harvester_resource_test.go&utm_medium=go.TestSuite&utm_campaign=harvester.ContentSuite")
+	suite.Equal(resolvedURL.String(), "https://www.netspective.com/solutions/opsfolio/?utm_source=lectio_harvester_resource_test.go&utm_medium=go.TestSuite&utm_campaign=harvester.ResourceSuite")
 	suite.Equal(cleanedURL.String(), "https://www.netspective.com/solutions/opsfolio/")
 	suite.Equal(finalURL.String(), cleanedURL.String(), "finalURL should be same as cleanedURL")
-
-	var testRandom uint32
-	var testTry int
-	keys := CreateHarvestedResourceKeys(hr, func(random uint32, try int) bool {
-		testRandom = random
-		testTry = try
-		return false
-	})
-	suite.Equal(testTry, 0)
-	suite.Equal(keys.UniqueID(), testRandom)
-	suite.Equal(keys.Slug(), "hipaa-compliant-cybersecurity-andamp-risk-assessment-software-netspective-opsfolio")
 	suite.NotNil(hr.InspectionResults(), "Inspection results should be available")
+	suite.Equal(hr.UniqueKey(), "c3ac941bc19188497805cbe583ff8d122ac663d6")
 }
 
+/*
 func (suite *ContentSuite) TestResolvedURLCleanedSerializer() {
 	hr := suite.harvestSingleURLFromMockTweet("Test a good URL %s which will redirect to a URL we want to ignore, with utm_* params", "http://bit.ly/lectio_harvester_resource_test02")
 	isURLValid, isDestValid := hr.IsValid()
