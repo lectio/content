@@ -285,8 +285,8 @@ func (r *HarvestedResource) InspectionResults() *InspectedContent {
 }
 
 // cleanResource checks to see if there are any parameters that should be removed (e.g. UTM_*)
-func cleanResource(url *url.URL, rule CleanCurationTargetRule) (bool, *url.URL) {
-	if !rule.CleanCurationTarget(url) {
+func cleanResource(url *url.URL, rule CleanResourceParamsRule) (bool, *url.URL) {
+	if !rule.CleanResourceParams(url) {
 		return false, nil
 	}
 
@@ -303,7 +303,7 @@ func cleanResource(url *url.URL, rule CleanCurationTargetRule) (bool, *url.URL) 
 	}
 	var cleanedParams []ParamMatch
 	for paramName := range harvestedParams {
-		remove, reason := rule.RemoveQueryParamFromCurationTargetURL(paramName)
+		remove, reason := rule.RemoveQueryParamFromResourceURL(paramName)
 		if remove {
 			harvestedParams.Del(paramName)
 			cleanedParams = append(cleanedParams, ParamMatch{paramName, reason})
@@ -318,7 +318,7 @@ func cleanResource(url *url.URL, rule CleanCurationTargetRule) (bool, *url.URL) 
 }
 
 // HarvestResource creates a HarvestedResource from a given URL and curation rules
-func HarvestResource(origURLtext string, cleanCurationTargetRule CleanCurationTargetRule, ignoreCurationTargetRule IgnoreCurationTargetRule,
+func HarvestResource(origURLtext string, cleanCurationTargetRule CleanResourceParamsRule, ignoreCurationTargetRule IgnoreResourceRule,
 	followHTMLRedirect FollowRedirectsInCurationTargetHTMLPayload) *HarvestedResource {
 	result := new(HarvestedResource)
 	result.origURLtext = origURLtext
@@ -345,7 +345,7 @@ func HarvestResource(origURLtext string, cleanCurationTargetRule CleanCurationTa
 
 	result.resolvedURL = resp.Request.URL
 	result.finalURL = result.resolvedURL
-	ignoreURL, ignoreReason := ignoreCurationTargetRule.IgnoreCurationTarget(result.resolvedURL)
+	ignoreURL, ignoreReason := ignoreCurationTargetRule.IgnoreResource(result.resolvedURL)
 	if ignoreURL {
 		result.isDestValid = true
 		result.isURLIgnored = true

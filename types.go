@@ -48,15 +48,15 @@ type Content interface {
 	Errors() []error
 }
 
-// IgnoreCurationTargetRule is a rule
-type IgnoreCurationTargetRule interface {
-	IgnoreCurationTarget(url *url.URL) (bool, string)
+// IgnoreResourceRule is a rule
+type IgnoreResourceRule interface {
+	IgnoreResource(url *url.URL) (bool, string)
 }
 
-// CleanCurationTargetRule is a rule
-type CleanCurationTargetRule interface {
-	CleanCurationTarget(url *url.URL) bool
-	RemoveQueryParamFromCurationTargetURL(paramName string) (bool, string)
+// CleanResourceParamsRule is a rule
+type CleanResourceParamsRule interface {
+	CleanResourceParams(url *url.URL) bool
+	RemoveQueryParamFromResourceURL(paramName string) (bool, string)
 }
 
 // FollowRedirectsInCurationTargetHTMLPayload defines whether we follow redirect rules in HTML <meta> refresh tags
@@ -65,5 +65,5 @@ type FollowRedirectsInCurationTargetHTMLPayload bool
 // CuratedContent is content which is basically a link to some other content on the Internet
 type CuratedContent interface {
 	Content
-	Target() *HarvestedResource
+	TargetResource() *HarvestedResource
 }

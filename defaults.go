@@ -14,7 +14,7 @@ var defaultCleanURLsRegExList removeParamsFromURLsRegExList = []*regexp.Regexp{r
 var defaultWebPrefixRegEx = regexp.MustCompile(`^www.`)                 // Removes "www." from start of source links
 var defaultTopLevelDomainSuffixRegEx = regexp.MustCompile(`\.[^\.]+?$`) // Removes ".com" and other TLD suffixes from end of hostname
 
-func (l ignoreURLsRegExList) IgnoreCurationTarget(url *url.URL) (bool, string) {
+func (l ignoreURLsRegExList) IgnoreResource(url *url.URL) (bool, string) {
 	URLtext := url.String()
 	for _, regEx := range l {
 		if regEx.MatchString(URLtext) {
@@ -24,12 +24,12 @@ func (l ignoreURLsRegExList) IgnoreCurationTarget(url *url.URL) (bool, string) {
 	return false, ""
 }
 
-func (l removeParamsFromURLsRegExList) CleanCurationTarget(url *url.URL) bool {
+func (l removeParamsFromURLsRegExList) CleanResourceParams(url *url.URL) bool {
 	// we try to clean all URLs, not specific ones
 	return true
 }
 
-func (l removeParamsFromURLsRegExList) RemoveQueryParamFromCurationTargetURL(paramName string) (bool, string) {
+func (l removeParamsFromURLsRegExList) RemoveQueryParamFromResourceURL(paramName string) (bool, string) {
 	for _, regEx := range l {
 		if regEx.MatchString(paramName) {
 			return true, fmt.Sprintf("Matched cleaner rule `%s`", regEx.String())
