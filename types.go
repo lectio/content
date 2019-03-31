@@ -3,9 +3,12 @@ package content
 import (
 	"net/url"
 	"time"
-
-	"github.com/hashicorp/go-multierror"
 )
+
+// ErrorsCollection tracks a collection of errors encountered
+type ErrorsCollection interface {
+	Errors() []error
+}
 
 // Title is the content title which can be retrieved in different ways
 type Title interface {
@@ -25,7 +28,7 @@ type Summary interface {
 type Collection interface {
 	Source() string
 	Content() []Content
-	Errors() *multierror.Error
+	Errors() ErrorsCollection
 }
 
 // Keys provides different ways of identifying content
@@ -47,11 +50,25 @@ type Content interface {
 	Keys() Keys
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
-	Errors() *multierror.Error
+	Errors() ErrorsCollection
 }
 
-// CuratedLink is content which is basically a link to some other content on the Internet
-type CuratedLink interface {
+// IgnoreCurationTargetRule is a rule
+type IgnoreCurationTargetRule interface {
+	IgnoreCurationTarget(url *url.URL) (bool, string)
+}
+
+// CleanCurationTargetRule is a rule
+type CleanCurationTargetRule interface {
+	CleanCurationTarget(url *url.URL) bool
+	RemoveQueryParamFromCurationTargetURL(paramName string) (bool, string)
+}
+
+// FollowRedirectsInCurationTargetHTMLPayload defines whether we follow redirect rules in HTML <meta> refresh tags
+type FollowRedirectsInCurationTargetHTMLPayload bool
+
+// CuratedContent is content which is basically a link to some other content on the Internet
+type CuratedContent interface {
 	Content
-	Target() *url.URL
+	Target() *HarvestedResource
 }
