@@ -381,3 +381,8 @@ func HarvestResource(origURLtext string, cleanCurationTargetRule CleanCurationTa
 
 	return result
 }
+
+// HarvestResourceWithDefaults creates a HarvestedResource from a given URL using default rules
+func HarvestResourceWithDefaults(origURLtext string) *HarvestedResource {
+	return HarvestResource(origURLtext, defaultCleanURLsRegExList, defaultIgnoreURLsRegExList, true)
+}
