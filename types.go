@@ -10,7 +10,6 @@ type Title interface {
 	Original() string
 	Clean() string
 	OpenGraphTitle() (string, bool)
-	ForSlug() string
 }
 
 // Summary is the content's description or summary which can be retrieved in different ways
