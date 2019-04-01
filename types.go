@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+// Keys defines different ways the content can be indexed
+type Keys interface {
+	GloballyUniqueKey() string
+}
+
 // Title is the content title which can be retrieved in different ways
 type Title interface {
 	Original() string
@@ -28,6 +33,7 @@ type Collection interface {
 
 // Content is the typical set of fields defined for almost any generated or constructed content page
 type Content interface {
+	Keys() Keys
 	Title() Title
 	Summary() Summary
 	Body() string
