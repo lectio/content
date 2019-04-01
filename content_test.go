@@ -140,7 +140,7 @@ func (suite *ContentSuite) TestResolvedURLCleanedKeys() {
 	suite.Equal(cleanedURL.String(), "https://www.netspective.com/solutions/opsfolio/")
 	suite.Equal(finalURL.String(), cleanedURL.String(), "finalURL should be same as cleanedURL")
 	suite.NotNil(hr.InspectionResults(), "Inspection results should be available")
-	suite.Equal(hr.UniqueKey(), "c3ac941bc19188497805cbe583ff8d122ac663d6")
+	suite.Equal(hr.GloballyUniqueKey(), "c3ac941bc19188497805cbe583ff8d122ac663d6")
 }
 
 /*

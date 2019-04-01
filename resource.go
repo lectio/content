@@ -234,7 +234,7 @@ type HarvestedResource struct {
 	resolvedURL       *url.URL
 	cleanedURL        *url.URL
 	finalURL          *url.URL
-	uniqueKey         string
+	globallyUniqueKey string
 	inspectionResults *InspectedContent
 }
 
@@ -286,9 +286,9 @@ func (r HarvestedResource) InspectionResults() *InspectedContent {
 	return r.inspectionResults
 }
 
-// UniqueKey returns a hash for the URL that can uniquely identify this resource
-func (r HarvestedResource) UniqueKey() string {
-	return r.uniqueKey
+// GloballyUniqueKey returns a hash for the URL that can uniquely identify this resource
+func (r HarvestedResource) GloballyUniqueKey() string {
+	return r.globallyUniqueKey
 }
 
 // cleanResource checks to see if there are any parameters that should be removed (e.g. UTM_*)
@@ -380,7 +380,7 @@ func HarvestResource(origURLtext string, cleanCurationTargetRule CleanResourcePa
 		h.Write([]byte(origURLtext))
 	}
 	bs := h.Sum(nil)
-	result.uniqueKey = fmt.Sprintf("%x", bs)
+	result.globallyUniqueKey = fmt.Sprintf("%x", bs)
 
 	// TODO once the URL is cleaned, double-check the cleaned URL to see if it's a valid destination; if not, revert to non-cleaned version
 	// this could be done recursively here or by the outer function. This is necessary because "cleaning" a URL and removing params might
