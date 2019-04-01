@@ -43,6 +43,8 @@ type Content interface {
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
 	Errors() []error
+	Directives() (interface{}, error)
+	Directive(key interface{}) (interface{}, error)
 }
 
 // IgnoreResourceRule is a rule
