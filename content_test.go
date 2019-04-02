@@ -218,4 +218,5 @@ func (suite *ContentSuite) TestResolvedDocumentURLNotCleaned() {
 
 func TestSuite(t *testing.T) {
 	suite.Run(t, new(ContentSuite))
+	suite.Run(t, new(FrontMatterSuite))
 }
