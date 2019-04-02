@@ -34,16 +34,17 @@ func (suite *FrontMatterSuite) TearDownSuite() {
 
 func (suite *FrontMatterSuite) TestNoFrontMatter() {
 	fm := make(map[string]string)
-	body, err := ParseYAMLFrontMatter([]byte(noFrontMatter), &fm)
+	body, haveFrontMatter, err := ParseYAMLFrontMatter([]byte(noFrontMatter), &fm)
 	suite.Nil(err, "Shouldn't have any errors")
-
+	suite.False(haveFrontMatter, "Should not have any front matter")
 	suite.Equal(fmt.Sprintf("%s", body), noFrontMatter)
 }
 
 func (suite *FrontMatterSuite) TestValidFrontMatter() {
 	fm := make(map[string]string)
-	body, err := ParseYAMLFrontMatter([]byte(validFrontMatter), &fm)
+	body, haveFrontMatter, err := ParseYAMLFrontMatter([]byte(validFrontMatter), &fm)
 	suite.Nil(err, "Shouldn't have any errors")
+	suite.True(haveFrontMatter, "Should not front matter")
 
 	suite.Equal(fmt.Sprintf("%s", body), "test body")
 
@@ -54,7 +55,7 @@ func (suite *FrontMatterSuite) TestValidFrontMatter() {
 
 func (suite *FrontMatterSuite) TestInvalidFrontMatter() {
 	fm := make(map[string]string)
-	_, err := ParseYAMLFrontMatter([]byte(invalidFrontMatter1), &fm)
+	_, _, err := ParseYAMLFrontMatter([]byte(invalidFrontMatter1), &fm)
 	suite.NotNil(err, "Should have error")
 	suite.EqualError(err, "Unexplained front matter parser error; insideFrontMatter: true, yamlStartIndex: 5, yamlEndIndex: 0")
 }

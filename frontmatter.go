@@ -10,7 +10,7 @@ import (
 )
 
 // ParseYAMLFrontMatter will convert an input byte array like ---<stuff>---\n<body> into v as YAML and <body> as return value
-func ParseYAMLFrontMatter(b []byte, v interface{}) ([]byte, error) {
+func ParseYAMLFrontMatter(b []byte, v interface{}) ([]byte, bool, error) {
 	buf := bytes.NewBuffer(b)
 
 	var insideFrontMatter bool
@@ -25,7 +25,7 @@ func ParseYAMLFrontMatter(b []byte, v interface{}) ([]byte, error) {
 		}
 
 		if err != nil {
-			return nil, err
+			return nil, false, err
 		}
 
 		if strings.TrimSpace(line) != "---" {
@@ -43,18 +43,18 @@ func ParseYAMLFrontMatter(b []byte, v interface{}) ([]byte, error) {
 
 	// if we get to here and we're not inside front matter then the entire string is body
 	if !insideFrontMatter {
-		return b, nil
+		return b, false, nil
 	}
 
 	if insideFrontMatter && yamlEndIndex == 0 {
-		return nil, fmt.Errorf("Unexplained front matter parser error; insideFrontMatter: %v, yamlStartIndex: %v, yamlEndIndex: %v", insideFrontMatter, yamlStartIndex, yamlEndIndex)
+		return nil, true, fmt.Errorf("Unexplained front matter parser error; insideFrontMatter: %v, yamlStartIndex: %v, yamlEndIndex: %v", insideFrontMatter, yamlStartIndex, yamlEndIndex)
 	}
 
 	err := yaml.Unmarshal(b[yamlStartIndex:yamlEndIndex], v)
 
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 
-	return bytes.TrimSpace(b[yamlEndIndex:]), nil
+	return bytes.TrimSpace(b[yamlEndIndex:]), true, nil
 }
