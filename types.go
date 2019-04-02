@@ -20,8 +20,17 @@ type Title interface {
 // Summary is the content's description or summary which can be retrieved in different ways
 type Summary interface {
 	Original() string
-	FirstSentenceOfBody() (string, error)
 	OpenGraphDescription() (string, bool)
+}
+
+// Body is the content's body which can be retrieved in different ways
+type Body interface {
+	Original() string
+	FirstSentence() (string, error)
+	WithoutFrontMatter() string
+	HaveFrontMatter() bool
+	FrontMatter() (interface{}, error)
+	FrontMatterValue(key interface{}) (interface{}, bool, error)
 }
 
 // Collection is a list of Content items
@@ -36,7 +45,7 @@ type Content interface {
 	Keys() Keys
 	Title() Title
 	Summary() Summary
-	Body() string
+	Body() Body
 	Categories() []string
 	CreatedOn() time.Time
 	FeaturedImage() *url.URL
@@ -44,7 +53,7 @@ type Content interface {
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
 	Errors() []error
 	Directives() (interface{}, error)
-	Directive(key interface{}) (interface{}, error)
+	Directive(key interface{}) (interface{}, bool, error)
 }
 
 // IgnoreResourceRule is a rule
