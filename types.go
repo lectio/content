@@ -14,7 +14,7 @@ type Keys interface {
 type Title interface {
 	Original() string
 	Clean() string
-	OpenGraphTitle() (string, bool)
+	OpenGraphTitle(clean bool) (string, bool)
 }
 
 // Summary is the content's description or summary which can be retrieved in different ways
