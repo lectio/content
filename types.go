@@ -3,6 +3,8 @@ package content
 import (
 	"net/url"
 	"time"
+
+	"github.com/lectio/link"
 )
 
 // Keys defines different ways the content can be indexed
@@ -56,22 +58,8 @@ type Content interface {
 	Directive(key interface{}) (interface{}, bool, error)
 }
 
-// IgnoreResourceRule is a rule
-type IgnoreResourceRule interface {
-	IgnoreResource(url *url.URL) (bool, string)
-}
-
-// CleanResourceParamsRule is a rule
-type CleanResourceParamsRule interface {
-	CleanResourceParams(url *url.URL) bool
-	RemoveQueryParamFromResourceURL(paramName string) (bool, string)
-}
-
-// FollowRedirectsInCurationTargetHTMLPayload defines whether we follow redirect rules in HTML <meta> refresh tags
-type FollowRedirectsInCurationTargetHTMLPayload bool
-
 // CuratedContent is content which is basically a link to some other content on the Internet
 type CuratedContent interface {
 	Content
-	TargetResource() *HarvestedResource
+	TargetResource() *link.Resource
 }

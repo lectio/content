@@ -10,6 +10,8 @@ github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/U
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.0.0 h1:iVjPR7a6H0tWELX5NxNe7bYopibicUzc7uPribsnS6o=
 github.com/hashicorp/go-multierror v1.0.0/go.mod h1:dHtQlpGsu+cZNNAkkCN/P3hoUDHhCYQXV3UM06sGGrk=
+github.com/lectio/link v0.0.0-20190404030448-db9bcf71a0e3 h1:BDh8VR7LyrSopIWVNzfnai9QVP7/W4WAShhGEUTeOd4=
+github.com/lectio/link v0.0.0-20190404030448-db9bcf71a0e3/go.mod h1:BXBilTi3I+PtlhcMFP/z81JyCKv1RIPYBqZSkgLEjnQ=
 github.com/lectio/observe v0.0.0-20190330161145-24f6fc031cdd h1:Tj3xxsz9XYOw/BaCE7dYFOlwhMlGYJNu3BH9cPBhsw8=
 github.com/lectio/observe v0.0.0-20190330161145-24f6fc031cdd/go.mod h1:U70gz4MZji5a71zVhxqnnip4ca5Tjwn64Ev9NeqGPmc=
 github.com/mvdan/xurls v1.1.0 h1:OpuDelGQ1R1ueQ6sSryzi6P+1RtBpfQHM8fJwlE45ww=
