@@ -8,6 +8,12 @@ type FilteredCollection interface {
 	Errors() []error
 }
 
+// FilterItemFn returns the content and true / error if a specific item should be filtered
+type FilterItemFn func(index int) (Content, bool, error)
+
+// FilterRangeFn returns the range and filter item function
+type FilterRangeFn func() (int, int, FilterItemFn)
+
 // filterResults implements both FilteredCollection and Collection interface contracts
 type filterResults struct {
 	purpose  string
@@ -43,7 +49,7 @@ func (f filterResults) Errors() []error {
 }
 
 // MakeFilteredCollection returns a
-func MakeFilteredCollection(purpose string, original Collection, rangeFn func() (int, int, func(index int) (Content, bool, error))) FilteredCollection {
+func MakeFilteredCollection(purpose string, original Collection, rangeFn FilterRangeFn) FilteredCollection {
 	result := new(filterResults)
 	result.purpose = purpose
 	result.original = original
