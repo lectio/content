@@ -60,7 +60,7 @@ type Content interface {
 type Link interface {
 	IsValid() (bool, bool)
 	IsIgnored() (bool, string)
-	FinalURL() *url.URL
+	FinalURL() (*url.URL, error)
 }
 
 // CuratedContent is content which is basically a link to some other content on the Internet
