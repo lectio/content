@@ -58,6 +58,7 @@ type Content interface {
 
 // Link is an external URL
 type Link interface {
+	Keys() Keys
 	IsValid() (bool, bool)
 	IsIgnored() (bool, string)
 	FinalURL() (*url.URL, error)
