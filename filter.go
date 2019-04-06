@@ -48,8 +48,8 @@ func (f filterResults) Errors() []error {
 	return f.errors
 }
 
-// MakeFilteredCollection returns a
-func MakeFilteredCollection(purpose string, original Collection, rangeFn CollectionFilterRangeFn) CollectionFilterResults {
+// FilterCollection returns a
+func FilterCollection(purpose string, original Collection, rangeFn CollectionFilterRangeFn) CollectionFilterResults {
 	result := new(filterResults)
 	result.purpose = purpose
 	result.original = original
