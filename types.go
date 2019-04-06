@@ -32,7 +32,7 @@ type Body interface {
 	FirstSentence() (string, error)
 	WithoutFrontMatter() string
 	HaveFrontMatter() bool
-	FrontMatter() flexmap.Map
+	FrontMatter() flexmap.TextKeyMap
 }
 
 // Collection is a list of Content items
