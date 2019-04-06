@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/lectio/flexmap"
-	"github.com/lectio/link"
 )
 
 // Keys defines different ways the content can be indexed
@@ -57,8 +56,13 @@ type Content interface {
 	Directives() flexmap.Map
 }
 
+// Link is an external URL
+type Link interface {
+	FinalURL() *url.URL
+}
+
 // CuratedContent is content which is basically a link to some other content on the Internet
 type CuratedContent interface {
 	Content
-	TargetResource() *link.Resource
+	Link() Link
 }
