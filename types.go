@@ -4,6 +4,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/lectio/flexmap"
 	"github.com/lectio/link"
 )
 
@@ -30,9 +31,7 @@ type Body interface {
 	Original() string
 	FirstSentence() (string, error)
 	WithoutFrontMatter() string
-	HaveFrontMatter() bool
-	FrontMatter() (interface{}, error)
-	FrontMatterValue(key interface{}) (interface{}, bool, error)
+	FrontMatter() flexmap.Map
 }
 
 // Collection is a list of Content items
@@ -54,8 +53,7 @@ type Content interface {
 	OpenGraphContent(ogKey string, defaultValue *string) (string, bool)
 	TwitterCardContent(twitterKey string, defaultValue *string) (string, bool)
 	Errors() []error
-	Directives() (interface{}, error)
-	Directive(key interface{}) (interface{}, bool, error)
+	Directives() flexmap.Map
 }
 
 // CuratedContent is content which is basically a link to some other content on the Internet
