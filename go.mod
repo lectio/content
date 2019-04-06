@@ -6,7 +6,7 @@ require (
 	github.com/gosimple/slug v1.4.2
 	github.com/h2non/filetype v1.0.8
 	github.com/hashicorp/go-multierror v1.0.0
-	github.com/lectio/flexmap v0.0.0-20190406172322-8e39b97d9184
+	github.com/lectio/flexmap v0.0.0-20190406181817-9acd03bc3313
 	github.com/lectio/link v0.0.0-20190404162948-74b09536610e
 	github.com/lectio/observe v0.0.0-20190330161145-24f6fc031cdd
 	github.com/mvdan/xurls v1.1.0 // indirect

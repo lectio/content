@@ -31,6 +31,7 @@ type Body interface {
 	Original() string
 	FirstSentence() (string, error)
 	WithoutFrontMatter() string
+	HaveFrontMatter() bool
 	FrontMatter() flexmap.Map
 }
 
