@@ -22,6 +22,7 @@ github.com/lectio/link v0.0.0-20190404030448-db9bcf71a0e3 h1:BDh8VR7LyrSopIWVNzf
 github.com/lectio/link v0.0.0-20190404030448-db9bcf71a0e3/go.mod h1:BXBilTi3I+PtlhcMFP/z81JyCKv1RIPYBqZSkgLEjnQ=
 github.com/lectio/link v0.0.0-20190404162948-74b09536610e h1:zA4VxF0l3tvMVfmr2GXyD+LLDUAnC1QFMvX4Ee4zGkc=
 github.com/lectio/link v0.0.0-20190404162948-74b09536610e/go.mod h1:BXBilTi3I+PtlhcMFP/z81JyCKv1RIPYBqZSkgLEjnQ=
+github.com/lectio/link v0.0.0-20190406194311-db01e9b20eef/go.mod h1:A/gV147io7QYmpyV3fVGVfpgrLNU0q3WJ/xveH51Y3U=
 github.com/lectio/observe v0.0.0-20190330161145-24f6fc031cdd h1:Tj3xxsz9XYOw/BaCE7dYFOlwhMlGYJNu3BH9cPBhsw8=
 github.com/lectio/observe v0.0.0-20190330161145-24f6fc031cdd/go.mod h1:U70gz4MZji5a71zVhxqnnip4ca5Tjwn64Ev9NeqGPmc=
 github.com/mvdan/xurls v1.1.0 h1:OpuDelGQ1R1ueQ6sSryzi6P+1RtBpfQHM8fJwlE45ww=
