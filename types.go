@@ -38,7 +38,6 @@ type Body interface {
 type Collection interface {
 	Source() string
 	Content() ([]Content, error)
-	FilteredContent(keep func(index int, c Content) (bool, error)) ([]Content, []error)
 	Errors() []error
 }
 
