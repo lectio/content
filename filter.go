@@ -1,18 +1,18 @@
 package content
 
-// FilteredCollection contains the results of a filter operation
-type FilteredCollection interface {
+// CollectionFilterResults contains the results of a filter operation
+type CollectionFilterResults interface {
 	Purpose() string
 	Original() Collection
 	Filtered() Collection
 	Errors() []error
 }
 
-// FilterItemFn returns the content and true / error if a specific item should be filtered
-type FilterItemFn func(index int) (Content, bool, error)
+// CollectionFilterItemFn returns the content and true / error if a specific item should be filtered
+type CollectionFilterItemFn func(index int) (Content, bool, error)
 
-// FilterRangeFn returns the range and filter item function
-type FilterRangeFn func() (int, int, FilterItemFn)
+// CollectionFilterRangeFn returns the range and filter item function
+type CollectionFilterRangeFn func() (int, int, CollectionFilterItemFn)
 
 // filterResults implements both FilteredCollection and Collection interface contracts
 type filterResults struct {
@@ -49,7 +49,7 @@ func (f filterResults) Errors() []error {
 }
 
 // MakeFilteredCollection returns a
-func MakeFilteredCollection(purpose string, original Collection, rangeFn FilterRangeFn) FilteredCollection {
+func MakeFilteredCollection(purpose string, original Collection, rangeFn CollectionFilterRangeFn) CollectionFilterResults {
 	result := new(filterResults)
 	result.purpose = purpose
 	result.original = original
