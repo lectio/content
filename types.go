@@ -8,22 +8,9 @@ import (
 )
 
 // Keys defines different ways the content can be indexed
-type Keys interface {
-	GloballyUniqueKey() string
-}
-
-// Title is the content title which can be retrieved in different ways
-type Title interface {
-	Original() string
-	Clean() string
-	OpenGraphTitle(clean bool) (string, bool)
-}
-
-// Summary is the content's description or summary which can be retrieved in different ways
-type Summary interface {
-	Original() string
-	OpenGraphDescription() (string, bool)
-}
+// type Keys interface {
+// 	GloballyUniqueKey() string
+// }
 
 // Body is the content's body which can be retrieved in different ways
 type Body interface {
@@ -43,9 +30,9 @@ type Collection interface {
 
 // Content is the typical set of fields defined for almost any generated or constructed content page
 type Content interface {
-	Keys() Keys
-	Title() Title
-	Summary() Summary
+	// Keys() Keys
+	Title() string
+	Summary() string
 	Body() Body
 	Categories() []string
 	CreatedOn() time.Time
